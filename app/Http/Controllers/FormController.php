@@ -47,7 +47,7 @@ class FormController extends Controller
         'passport_size' => 'nullable|file|mimes:pdf,jpg,png,doc,docx|max:2048',
         'practice_license' => 'required|file|mimes:pdf,jpg,png,doc,docx|max:2048',
         'recommendation_letter' => 'required|file|mimes:pdf,jpg,png|max:2048',
-        'payment_proof' => 'nullable|file|mimes:pdf,jpg,png|max:2048',
+        'payment_proof' => 'required|file|mimes:pdf,jpg,png|max:2048',
     ]);
 
     // Handle file uploads
@@ -166,7 +166,7 @@ public function update(Request $request, $id)
         'passport_size' => 'nullable|file|mimes:pdf,jpg,png,doc,docx|max:2048',
         'practice_license' => 'nullable|file|mimes:pdf,jpg,png,doc,docx|max:2048',
         'recommendation_letter' => 'nullable|file|mimes:pdf,jpg,png|max:2048',
-        'payment_proof' => 'nullable|file|mimes:pdf,jpg,png|max:2048',
+        'payment_proof' => 'required|file|mimes:pdf,jpg,png|max:2048',
     ]);
 
     // Find the existing application by ID

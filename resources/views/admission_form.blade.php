@@ -135,17 +135,17 @@
                                                 </option>
                                             @endforeach
                                         </select>
-                                        <span class="text-input">Country</span>
+                                        <span class="text-input">Country <span style="color: red">*</span></span>
                                     </div>
 
                                     <div class="form-group">
                                         <input type="text" name="city" id="city" value="{{ old('city') }}" />
-                                        <span class="text-input">City</span>
+                                        <span class="text-input">City  <span style="color: red">*</span></span>
                                     </div>
                                     <div class="form-group">
                                         <input type="text" name="street" id="street"
                                             value="{{ old('street') }}" />
-                                        <span class="text-input">Street</span>
+                                        <span class="text-input">Physical Address <span style="color: red">*</span></span>
                                     </div>
                                 </div>
                             </div>

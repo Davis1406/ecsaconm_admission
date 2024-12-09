@@ -24,7 +24,7 @@
         </div>
         <div class="text">
             For any further questions, please contact
-            <a href="mailto:info@ecsaconm.org">info@ecsaconm.org</a>
+            <a href="mailto:info@ecsacon.org">info@ecsacon.org</a>
             or visit our website at
             <a href="https://www.ecsaconm.org/" target="_blank">https://www.ecsaconm.org/</a>.
         </div>

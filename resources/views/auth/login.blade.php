@@ -12,7 +12,7 @@
                             <a href="index.html"><img src="{{ URL::to('assets/img/logo.png') }}" alt="Logo"></a>
                         </div>
                         <h3 class="account-title">Login</h3>
-                        <p class="account-subtitle">Access to our dashboard</p>
+                        <p class="account-subtitle">Access to Admission Portal</p>
                         <!-- Account Form -->
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
