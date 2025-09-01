@@ -23,6 +23,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
+                                    <th>Email</th>
                                     <th>Country</th>
                                     <th>Programme</th>
                                     <th>Status</th>
@@ -34,6 +35,7 @@
                                     <tr>
                                         <td>{{ $application->id }}</td>
                                         <td><a href="{{ route('applications.view_applications', $application->id) }}" class="styled-link">{{ $application->certificate_name }}</a> </td>
+                                        <td>{{ $application->p_email }}</td>
                                         <td>{{ $application->country->country_name }}</td>
                                         <td>{{ $application->programme->programme_name }}</td>
                                         <td>

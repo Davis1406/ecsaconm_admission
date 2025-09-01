@@ -9,10 +9,8 @@ class FormModel extends Model
 {
     use HasFactory;
 
-    // Define the table associated with this model
     protected $table = 'application_form';
 
-    // Specify the columns that can be mass-assigned
     protected $fillable = [
         'title',
         'firstname',
@@ -30,6 +28,7 @@ class FormModel extends Model
         'education',
         'experience',
         'completion_year',
+        'application_year',   // ✅ new field
         'declaration',
         'fee_paid',
         'degree_certificate',
@@ -41,12 +40,9 @@ class FormModel extends Model
         'is_deleted'
     ];
 
-    /**
-     * Retrieve application forms with additional joins or filters
-     */
     static public function getApplications()
     {
-        $return = self::select(
+        return self::select(
                 'application_form.*',
                 'countries.country_name as c_name',
                 'application_form.personal_email as p_email',
@@ -54,23 +50,19 @@ class FormModel extends Model
             )
             ->join('countries', 'application_form.country_id', '=', 'countries.id')
             ->join('Programmes', 'application_form.programme_id', '=', 'Programmes.id')
-            ->where('application_form.is_deleted', 0) // Add the condition here
+            ->where('application_form.is_deleted', 0)
             ->orderBy('application_form.id', 'asc')
             ->get();
-    
-        return $return;
     }
-    
 
-    // Relationship with Countries
     public function country()
     {
         return $this->belongsTo(Country::class, 'country_id', 'id');
     }
 
-    // Relationship with Programmes
     public function programme()
     {
         return $this->belongsTo(Programme::class, 'programme_id', 'id');
     }
 }
+

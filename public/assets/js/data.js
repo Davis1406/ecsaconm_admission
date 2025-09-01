@@ -8,6 +8,7 @@ $(function () {
         "columns": [
             { "visible": true }, // ID
             { "visible": true }, // Name
+            { "visible": true }, // Email
             { "visible": true }, // Country
             { "visible": true }, // Programme
             { "visible": true }, // Status

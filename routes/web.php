@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Route::get('application_form', [FormController::class, 'viewForm'])->name('viewForm');
 Route::post('/store', [FormController::class, 'store'])->name('store');
+Route::get('applications/year', [FormController::class, 'applicationYear'])->name('applications.year');
+Route::post('applications/filter', [FormController::class, 'filterByYear'])->name('applications.filter');
 Route::get('/success', function () {
     return view('success');
 });
