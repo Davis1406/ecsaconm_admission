@@ -26,7 +26,7 @@
                 <li class="nav-item @if (Request::segment(1) == 'applications' && Request::segment(2) == 'year') active @endif">
                     <a href="{{ route('applications.year') }}">
                         <i class="la la-calendar"></i>
-                        <span>Application Years</span>
+                        <span>Applications</span>
                     </a>
                 </li>
 

@@ -88,9 +88,9 @@ class FormController extends Controller
             'payment_proof' => $paymentProofPath,
         ]);
 
-        dd($request->all());
+        // dd($request->all());
 
-        // return view('success');
+        return view('success');
     }
 
 
