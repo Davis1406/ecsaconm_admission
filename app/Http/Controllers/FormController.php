@@ -26,7 +26,7 @@ class FormController extends Controller
 
         // Validate the request
         $request->validate([
-            'title' => 'required|in:proffesor,doctor,mr,mrs,miss',
+            'title' => 'required|in:professor,doctor,mr,mrs,miss',
             'firstname' => 'required|string|max:255',
             'middlename' => 'nullable|string|max:255',
             'lastname' => 'required|string|max:255',
@@ -146,7 +146,7 @@ class FormController extends Controller
     {
         // Validate the request
         $request->validate([
-            'title' => 'required|in:proffesor,doctor,mr,mrs,miss',
+            'title' => 'required|in:professor,doctor,mr,mrs,miss',
             'firstname' => 'required|string|max:255',
             'middlename' => 'nullable|string|max:255',
             'lastname' => 'required|string|max:255',
@@ -169,7 +169,7 @@ class FormController extends Controller
             'passport_size' => 'nullable|file|mimes:pdf,jpg,png,doc,docx|max:2048',
             'practice_license' => 'nullable|file|mimes:pdf,jpg,png,doc,docx|max:2048',
             'recommendation_letter' => 'nullable|file|mimes:pdf,jpg,png|max:2048',
-            'payment_proof' => 'required|file|mimes:pdf,jpg,png|max:2048',
+            'payment_proof' => 'nullable|file|mimes:pdf,jpg,png|max:2048',
         ]);
 
         // Find the existing application by ID

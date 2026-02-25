@@ -43,7 +43,7 @@
                                     <div class="form-group">
                                         <select class="form-control" name="title" id="title">
                                             <option value="">Select title...</option>
-                                            <option value="proffesor" {{ old('title') == 'proffesor' ? 'selected' : '' }}>
+                                            <option value="professor" {{ old('title') == 'professor' ? 'selected' : '' }}>
                                                 Prof.</option>
                                             <option value="doctor" {{ old('title') == 'doctor' ? 'selected' : '' }}>Dr.
                                             </option>

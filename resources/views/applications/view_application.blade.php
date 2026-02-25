@@ -361,7 +361,7 @@
                                                         <label>Title</label>
                                                         <select class="form-control" id="title" name="title">
                                                             <option value="" disabled>Select Title</option>
-                                                            <option value="professor" {{ $application->title == 'professor' ? 'selected' : '' }}>Professor</option>
+                                                            <option value="professor" {{ in_array($application->title, ['professor', 'proffesor']) ? 'selected' : '' }}>Professor</option>
                                                             <option value="doctor" {{ $application->title == 'doctor' ? 'selected' : '' }}>Doctor</option>
                                                             <option value="mr" {{ $application->title == 'mr' ? 'selected' : '' }}>Mr</option>
                                                             <option value="mrs" {{ $application->title == 'mrs' ? 'selected' : '' }}>Mrs</option>
