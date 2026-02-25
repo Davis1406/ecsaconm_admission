@@ -339,7 +339,7 @@
                                                 <div class="form-group">
                                                     <label>Status</label>
                                                     <select class="select form-control" id="status" name="status">
-                                                        <option value="received" {{ $application->status == 'received' ? 'selected' : '' }}>Applications</option>
+                                                        <option value="received" {{ $application->status == 'received' ? 'selected' : '' }}>Received</option>
                                                         <option value="question" {{ $application->status == 'question' ? 'selected' : '' }}>Question</option>
                                                         <option value="approved" {{ $application->status == 'approved' ? 'selected' : '' }}>Approved</option>
                                                         <option value="rejected" {{ $application->status == 'rejected' ? 'selected' : '' }}>Rejected</option>

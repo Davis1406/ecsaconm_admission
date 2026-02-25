@@ -20,7 +20,7 @@
 
             @php
                 $stages = [
-                    'received' => 'Applications',
+                    'received' => 'Received',
                     'question' => 'Question',
                     'approved' => 'Approved',
                     'rejected' => 'Rejected',
@@ -116,7 +116,7 @@
                                                     <div class="text">
                                                         @switch($application->status)
                                                             @case('received')
-                                                                <span class="badge" style="background-color:#fde8eb;color:#fe5067;">Applications</span>
+                                                                <span class="badge bg-inverse-primary">Received</span>
                                                             @break
                                                             @case('question')
                                                                 <span class="badge bg-inverse-warning">Question</span>
@@ -131,7 +131,7 @@
                                                                 <span class="badge" style="background-color:#34444c;color:#fff;">Closed</span>
                                                             @break
                                                             @default
-                                                                <span class="badge" style="background-color:#fde8eb;color:#fe5067;">Applications</span>
+                                                                <span class="badge bg-inverse-primary">Received</span>
                                                         @endswitch
                                                     </div>
                                                 </li>
@@ -401,7 +401,7 @@
                                                 <div class="form-group">
                                                     <label>Status</label>
                                                     <select class="select form-control" id="status" name="status">
-                                                        <option value="received" {{ $application->status == 'received' ? 'selected' : '' }}>Applications</option>
+                                                        <option value="received" {{ $application->status == 'received' ? 'selected' : '' }}>Received</option>
                                                         <option value="question" {{ $application->status == 'question' ? 'selected' : '' }}>Question</option>
                                                         <option value="approved" {{ $application->status == 'approved' ? 'selected' : '' }}>Approved</option>
                                                         <option value="rejected" {{ $application->status == 'rejected' ? 'selected' : '' }}>Rejected</option>

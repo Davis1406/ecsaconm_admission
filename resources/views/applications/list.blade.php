@@ -41,7 +41,7 @@
                                         <td>
                                             @switch($application->status)
                                                 @case('received')
-                                                    <span class="badge" style="background-color:#fde8eb;color:#fe5067;">Applications</span>
+                                                    <span class="badge bg-inverse-primary">Received</span>
                                                     @break
                                                 @case('question')
                                                     <span class="badge bg-inverse-warning">Question</span>
@@ -56,7 +56,7 @@
                                                     <span class="badge" style="background-color:#34444c;color:#fff;">Closed</span>
                                                     @break
                                                 @default
-                                                    <span class="badge" style="background-color:#fde8eb;color:#fe5067;">Applications</span>
+                                                    <span class="badge bg-inverse-primary">Received</span>
                                             @endswitch
                                         </td>
                                         <td class="text-right">
