@@ -75,6 +75,7 @@ Route::group(['namespace' => 'App\Http\Controllers'],function()
         Route::get('applications/list', 'applications')->name('applications');
         Route::get('applications/view_application/{id}', 'viewApplication')->name('applications.view_applications');
         Route::post('application/{id}/update', 'update')->name('application.update');
+        Route::post('application/{id}/status', 'updateStatus')->name('application.status');
         Route::post('application/delete/{id}', 'delete')->name('application.delete');
         Route::get('applications/update_application/{id}', 'FormController@editApplication')->name('application.edit');
     });

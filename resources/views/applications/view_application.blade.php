@@ -17,6 +17,73 @@
             </div>
 
             <!-- /Page Header -->
+
+            @php
+                $stages = [
+                    'received'        => 'Applications',
+                    'in_application'  => 'In the Application',
+                    'question'        => 'Question',
+                    'approved'        => 'Approved',
+                    'invoiced'        => 'Invoiced',
+                    'rejected'        => 'Rejected',
+                    'withdrawn'       => 'Withdrawn',
+                    'closed'          => 'Closed',
+                    'payment_pending' => 'Payment Pending',
+                ];
+            @endphp
+
+            <!-- Pipeline Status Bar -->
+            <div class="pipeline-wrapper mb-3">
+                <style>
+                    .pipeline-wrapper { background: #fff; border-radius: 6px; box-shadow: 0 1px 4px rgba(0,0,0,.08); padding: 10px 12px; display: flex; align-items: center; }
+                    .pipeline-scroll { display: flex; overflow-x: auto; flex: 1; scrollbar-width: none; -ms-overflow-style: none; }
+                    .pipeline-scroll::-webkit-scrollbar { display: none; }
+                    .pipeline-stage-form { display: inline-flex; margin-right: 2px; }
+                    .pipeline-btn {
+                        position: relative; padding: 8px 28px 8px 22px; border: none; cursor: pointer;
+                        font-size: 13px; font-weight: 500; white-space: nowrap;
+                        background: #f0eeec; color: #555;
+                        clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%, 14px 50%);
+                        transition: background .2s, color .2s;
+                    }
+                    .pipeline-stage-form:first-child .pipeline-btn {
+                        clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%);
+                        padding-left: 16px;
+                    }
+                    .pipeline-btn:hover { background: #d9c9b8; color: #333; }
+                    .pipeline-btn.active { background: #5c3317; color: #fff; }
+                    .pipeline-btn.active:hover { background: #4a2810; }
+                    .pipeline-nav { display: flex; gap: 4px; margin-left: 8px; flex-shrink: 0; }
+                    .pipeline-nav-btn { background: #f0eeec; border: 1px solid #ddd; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-size: 14px; }
+                    .pipeline-nav-btn:hover { background: #ddd; }
+                </style>
+
+                <div class="pipeline-scroll" id="pipelineScroll">
+                    @foreach($stages as $value => $label)
+                        <form class="pipeline-stage-form" action="{{ route('application.status', $application->id) }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="status" value="{{ $value }}">
+                            <button type="submit" class="pipeline-btn {{ $application->status == $value ? 'active' : '' }}">
+                                {{ $label }}
+                            </button>
+                        </form>
+                    @endforeach
+                </div>
+
+                <div class="pipeline-nav">
+                    <button class="pipeline-nav-btn" onclick="document.getElementById('pipelineScroll').scrollBy({left:-150,behavior:'smooth'})">&#9664;</button>
+                    <button class="pipeline-nav-btn" onclick="document.getElementById('pipelineScroll').scrollBy({left:150,behavior:'smooth'})">&#9654;</button>
+                </div>
+            </div>
+            <!-- /Pipeline Status Bar -->
+
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                </div>
+            @endif
+
             <div class="card mb-0">
                 <div class="card-body">
                     <div class="row">
@@ -53,21 +120,32 @@
                                                     <div class="text">
                                                         @switch($application->status)
                                                             @case('received')
-                                                                <span class="badge bg-inverse-primary">Received</span>
+                                                                <span class="badge bg-inverse-primary">Applications</span>
                                                             @break
-
-                                                            @case('approved')
-                                                                <span class="badge bg-inverse-success">Approved</span>
+                                                            @case('in_application')
+                                                                <span class="badge bg-inverse-info">In the Application</span>
                                                             @break
-
                                                             @case('question')
                                                                 <span class="badge bg-inverse-warning">Question</span>
                                                             @break
-
+                                                            @case('approved')
+                                                                <span class="badge bg-inverse-success">Approved</span>
+                                                            @break
+                                                            @case('invoiced')
+                                                                <span class="badge bg-inverse-purple" style="background-color:#e8d5f5;color:#6f42c1;">Invoiced</span>
+                                                            @break
                                                             @case('rejected')
                                                                 <span class="badge bg-inverse-danger">Rejected</span>
                                                             @break
-
+                                                            @case('withdrawn')
+                                                                <span class="badge bg-inverse-secondary">Withdrawn</span>
+                                                            @break
+                                                            @case('closed')
+                                                                <span class="badge" style="background-color:#e2e3e5;color:#383d41;">Closed</span>
+                                                            @break
+                                                            @case('payment_pending')
+                                                                <span class="badge" style="background-color:#fff3cd;color:#856404;">Payment Pending</span>
+                                                            @break
                                                             @default
                                                                 <span class="badge bg-inverse-secondary">Unknown</span>
                                                         @endswitch
@@ -339,18 +417,15 @@
                                                 <div class="form-group">
                                                     <label>Status</label>
                                                     <select class="select form-control" id="status" name="status">
-                                                        <option value="received"
-                                                            {{ $application->status == 'received' ? 'selected' : '' }}>
-                                                            Received</option>
-                                                        <option value="approved"
-                                                            {{ $application->status == 'approved' ? 'selected' : '' }}>
-                                                            Approved</option>
-                                                        <option value="question"
-                                                            {{ $application->status == 'question' ? 'selected' : '' }}>
-                                                            Question</option>
-                                                        <option value="rejected"
-                                                            {{ $application->status == 'rejected' ? 'selected' : '' }}>
-                                                            Rejected</option>
+                                                        <option value="received" {{ $application->status == 'received' ? 'selected' : '' }}>Applications</option>
+                                                        <option value="in_application" {{ $application->status == 'in_application' ? 'selected' : '' }}>In the Application</option>
+                                                        <option value="question" {{ $application->status == 'question' ? 'selected' : '' }}>Question</option>
+                                                        <option value="approved" {{ $application->status == 'approved' ? 'selected' : '' }}>Approved</option>
+                                                        <option value="invoiced" {{ $application->status == 'invoiced' ? 'selected' : '' }}>Invoiced</option>
+                                                        <option value="rejected" {{ $application->status == 'rejected' ? 'selected' : '' }}>Rejected</option>
+                                                        <option value="withdrawn" {{ $application->status == 'withdrawn' ? 'selected' : '' }}>Withdrawn</option>
+                                                        <option value="closed" {{ $application->status == 'closed' ? 'selected' : '' }}>Closed</option>
+                                                        <option value="payment_pending" {{ $application->status == 'payment_pending' ? 'selected' : '' }}>Payment Pending</option>
                                                     </select>
                                                 </div>
                                                 
