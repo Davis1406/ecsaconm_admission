@@ -451,15 +451,4 @@ class EmployeeController extends Controller
         return view('employees.designations');
     }
 
-    /** Page Time Sheet */
-    public function timeSheetIndex()
-    {
-        return view('employees.timesheet');
-    }
-
-    /** Page Overtime */
-    public function overTimeIndex()
-    {
-        return view('employees.overtime');
-    }
 }

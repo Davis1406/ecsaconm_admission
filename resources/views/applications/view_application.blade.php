@@ -50,6 +50,80 @@
                     .pipeline-btn:hover { background: #fbd0d5; color: #34444c; }
                     .pipeline-btn.active { background: #fe5067; color: #fff; }
                     .pipeline-btn.active:hover { background: #e0304a; }
+
+                    /* Document Preview Link Buttons */
+                    .doc-link-btn {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 7px;
+                        padding: 5px 16px;
+                        border: 1.5px solid #fe5067;
+                        border-radius: 20px;
+                        color: #fe5067 !important;
+                        font-size: 13px;
+                        font-weight: 500;
+                        text-decoration: none !important;
+                        background: #fff5f6;
+                        transition: all .2s ease;
+                    }
+                    .doc-link-btn:hover {
+                        background: #fe5067;
+                        color: #fff !important;
+                        text-decoration: none !important;
+                        box-shadow: 0 3px 10px rgba(254,80,103,.25);
+                    }
+                    .doc-link-btn i { font-size: 13px; }
+
+                    /* Document Modal Footer Buttons */
+                    .btn-doc-open {
+                        background: linear-gradient(135deg, #fe5067, #e8304a);
+                        color: #fff !important;
+                        border: none;
+                        padding: 9px 24px;
+                        border-radius: 22px;
+                        font-size: 13px;
+                        font-weight: 600;
+                        letter-spacing: .03em;
+                        box-shadow: 0 3px 10px rgba(254,80,103,.35);
+                        transition: all .2s ease;
+                        text-decoration: none !important;
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 7px;
+                    }
+                    .btn-doc-open:hover {
+                        background: linear-gradient(135deg, #e8304a, #c42038);
+                        color: #fff !important;
+                        box-shadow: 0 5px 16px rgba(254,80,103,.5);
+                        transform: translateY(-1px);
+                    }
+                    .btn-doc-close {
+                        background: transparent;
+                        color: #34444c;
+                        border: 2px solid #34444c;
+                        padding: 9px 24px;
+                        border-radius: 22px;
+                        font-size: 13px;
+                        font-weight: 600;
+                        transition: all .2s ease;
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 7px;
+                    }
+                    .btn-doc-close:hover {
+                        background: #34444c;
+                        color: #fff;
+                        transform: translateY(-1px);
+                    }
+                    .doc-modal-footer {
+                        background: #f9f9f9;
+                        border-top: 1px solid #eee;
+                        padding: 14px 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-end;
+                        gap: 10px;
+                    }
                 </style>
 
                 <div class="pipeline-title">Application Stage</div>
@@ -309,8 +383,8 @@
                                             <div class="title">Degree Certificate:</div>
                                             <div class="text">
                                                 @if (!empty($application->degree_certificate))
-                                                    <a href="#" class="doc-preview-link" data-url="{{ asset('storage/' . $application->degree_certificate) }}" data-title="Degree Certificate">
-                                                        <i class="fa fa-eye"></i> View Degree Certificate
+                                                    <a href="#" class="doc-preview-link doc-link-btn" data-url="{{ asset('storage/' . $application->degree_certificate) }}" data-title="Degree Certificate">
+                                                        <i class="fa fa-file-text-o"></i> View Degree Certificate
                                                     </a>
                                                 @else
                                                     N/A
@@ -322,8 +396,8 @@
                                             <div class="title">Practice License:</div>
                                             <div class="text">
                                                 @if (!empty($application->practice_license))
-                                                    <a href="#" class="doc-preview-link" data-url="{{ asset('storage/' . $application->practice_license) }}" data-title="Practice License">
-                                                        <i class="fa fa-eye"></i> View License
+                                                    <a href="#" class="doc-preview-link doc-link-btn" data-url="{{ asset('storage/' . $application->practice_license) }}" data-title="Practice License">
+                                                        <i class="fa fa-file-text-o"></i> View License
                                                     </a>
                                                 @else
                                                     N/A
@@ -335,8 +409,8 @@
                                             <div class="title">Recommendation Letter:</div>
                                             <div class="text">
                                                 @if (!empty($application->recommendation_letter))
-                                                    <a href="#" class="doc-preview-link" data-url="{{ asset('storage/' . $application->recommendation_letter) }}" data-title="Recommendation Letter">
-                                                        <i class="fa fa-eye"></i> View Recommendation Letter
+                                                    <a href="#" class="doc-preview-link doc-link-btn" data-url="{{ asset('storage/' . $application->recommendation_letter) }}" data-title="Recommendation Letter">
+                                                        <i class="fa fa-file-text-o"></i> View Recommendation Letter
                                                     </a>
                                                 @else
                                                     N/A
@@ -348,8 +422,8 @@
                                             <div class="title">Proof of Payment:</div>
                                             <div class="text">
                                                 @if (!empty($application->payment_proof))
-                                                    <a href="#" class="doc-preview-link" data-url="{{ asset('storage/' . $application->payment_proof) }}" data-title="Proof of Payment">
-                                                        <i class="fa fa-eye"></i> View Payment Proof
+                                                    <a href="#" class="doc-preview-link doc-link-btn" data-url="{{ asset('storage/' . $application->payment_proof) }}" data-title="Proof of Payment">
+                                                        <i class="fa fa-file-text-o"></i> View Payment Proof
                                                     </a>
                                                 @else
                                                     N/A
@@ -371,11 +445,13 @@
                                                         <span class="text-muted">Loading...</span>
                                                     </div>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <a id="docDownloadLink" href="#" target="_blank" class="btn btn-primary btn-sm">
+                                                <div class="doc-modal-footer">
+                                                    <a id="docDownloadLink" href="#" target="_blank" class="btn-doc-open">
                                                         <i class="fa fa-external-link"></i> Open in New Tab
                                                     </a>
-                                                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn-doc-close" data-dismiss="modal">
+                                                        <i class="fa fa-times"></i> Close
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
