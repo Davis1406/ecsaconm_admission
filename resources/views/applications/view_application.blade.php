@@ -31,8 +31,9 @@
             <!-- Pipeline Status Bar -->
             <div class="pipeline-wrapper mb-3">
                 <style>
-                    .pipeline-wrapper { background: #fff; border-radius: 6px; box-shadow: 0 1px 4px rgba(0,0,0,.08); padding: 10px 12px; display: flex; align-items: center; }
-                    .pipeline-scroll { display: flex; overflow-x: auto; flex: 1; scrollbar-width: none; -ms-overflow-style: none; }
+                    .pipeline-wrapper { background: #fff; border-radius: 6px; box-shadow: 0 1px 4px rgba(0,0,0,.08); padding: 10px 12px; }
+                    .pipeline-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: #888; margin-bottom: 8px; }
+                    .pipeline-scroll { display: flex; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
                     .pipeline-scroll::-webkit-scrollbar { display: none; }
                     .pipeline-stage-form { display: inline-flex; margin-right: 2px; }
                     .pipeline-btn {
@@ -49,12 +50,10 @@
                     .pipeline-btn:hover { background: #fbd0d5; color: #34444c; }
                     .pipeline-btn.active { background: #fe5067; color: #fff; }
                     .pipeline-btn.active:hover { background: #e0304a; }
-                    .pipeline-nav { display: flex; gap: 4px; margin-left: 8px; flex-shrink: 0; }
-                    .pipeline-nav-btn { background: #fde8eb; border: 1px solid #fe5067; color: #fe5067; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-size: 14px; }
-                    .pipeline-nav-btn:hover { background: #fe5067; color: #fff; }
                 </style>
 
-                <div class="pipeline-scroll" id="pipelineScroll">
+                <div class="pipeline-title">Application Stage</div>
+                <div class="pipeline-scroll">
                     @foreach($stages as $value => $label)
                         <form class="pipeline-stage-form" action="{{ route('application.status', $application->id) }}" method="POST">
                             @csrf
@@ -64,11 +63,6 @@
                             </button>
                         </form>
                     @endforeach
-                </div>
-
-                <div class="pipeline-nav">
-                    <button class="pipeline-nav-btn" onclick="document.getElementById('pipelineScroll').scrollBy({left:-150,behavior:'smooth'})">&#9664;</button>
-                    <button class="pipeline-nav-btn" onclick="document.getElementById('pipelineScroll').scrollBy({left:150,behavior:'smooth'})">&#9654;</button>
                 </div>
             </div>
             <!-- /Pipeline Status Bar -->
@@ -315,8 +309,9 @@
                                             <div class="title">Degree Certificate:</div>
                                             <div class="text">
                                                 @if (!empty($application->degree_certificate))
-                                                    <a href="{{ asset('storage/' . $application->degree_certificate) }}"
-                                                        target="_blank">View Degree Certificate</a>
+                                                    <a href="#" class="doc-preview-link" data-url="{{ asset('storage/' . $application->degree_certificate) }}" data-title="Degree Certificate">
+                                                        <i class="fa fa-eye"></i> View Degree Certificate
+                                                    </a>
                                                 @else
                                                     N/A
                                                 @endif
@@ -327,8 +322,9 @@
                                             <div class="title">Practice License:</div>
                                             <div class="text">
                                                 @if (!empty($application->practice_license))
-                                                    <a href="{{ asset('storage/' . $application->practice_license) }}"
-                                                        target="_blank">View License</a>
+                                                    <a href="#" class="doc-preview-link" data-url="{{ asset('storage/' . $application->practice_license) }}" data-title="Practice License">
+                                                        <i class="fa fa-eye"></i> View License
+                                                    </a>
                                                 @else
                                                     N/A
                                                 @endif
@@ -338,9 +334,10 @@
                                         <li>
                                             <div class="title">Recommendation Letter:</div>
                                             <div class="text">
-                                                @if (!empty($application->practice_license))
-                                                    <a href="{{ asset('storage/' . $application->recommendation_letter) }}"
-                                                        target="_blank">View Recommendation Letter</a>
+                                                @if (!empty($application->recommendation_letter))
+                                                    <a href="#" class="doc-preview-link" data-url="{{ asset('storage/' . $application->recommendation_letter) }}" data-title="Recommendation Letter">
+                                                        <i class="fa fa-eye"></i> View Recommendation Letter
+                                                    </a>
                                                 @else
                                                     N/A
                                                 @endif
@@ -351,14 +348,39 @@
                                             <div class="title">Proof of Payment:</div>
                                             <div class="text">
                                                 @if (!empty($application->payment_proof))
-                                                    <a href="{{ asset('storage/' . $application->payment_proof) }}"
-                                                        target="_blank">View Payment Proof</a>
+                                                    <a href="#" class="doc-preview-link" data-url="{{ asset('storage/' . $application->payment_proof) }}" data-title="Proof of Payment">
+                                                        <i class="fa fa-eye"></i> View Payment Proof
+                                                    </a>
                                                 @else
                                                     N/A
                                                 @endif
                                             </div>
                                         </li>
                                     </ul>
+
+                                    <!-- Document Preview Modal -->
+                                    <div id="docPreviewModal" class="modal custom-modal fade" role="dialog">
+                                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="docPreviewTitle">Document Preview</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                                </div>
+                                                <div class="modal-body p-0" style="min-height:500px;">
+                                                    <div id="docPreviewContainer" style="width:100%;height:600px;display:flex;align-items:center;justify-content:center;">
+                                                        <span class="text-muted">Loading...</span>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a id="docDownloadLink" href="#" target="_blank" class="btn btn-primary btn-sm">
+                                                        <i class="fa fa-external-link"></i> Open in New Tab
+                                                    </a>
+                                                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /Document Preview Modal -->
                                 </div>
                             </div>
                         </div>
@@ -687,6 +709,31 @@
         <!-- /Page Content -->
         @section('script')
             <script>
+                // Document preview popup
+                $(document).on('click', '.doc-preview-link', function(e) {
+                    e.preventDefault();
+                    var url   = $(this).data('url');
+                    var title = $(this).data('title');
+                    var ext   = url.split('.').pop().toLowerCase();
+                    var isImage = ['jpg','jpeg','png','gif','webp'].includes(ext);
+
+                    $('#docPreviewTitle').text(title);
+                    $('#docDownloadLink').attr('href', url);
+
+                    if (isImage) {
+                        $('#docPreviewContainer').html('<img src="' + url + '" style="max-width:100%;max-height:580px;object-fit:contain;" />');
+                    } else {
+                        $('#docPreviewContainer').html('<iframe src="' + url + '" style="width:100%;height:600px;border:none;"></iframe>');
+                    }
+
+                    $('#docPreviewModal').modal('show');
+                });
+
+                // Clear preview content when modal closes to stop embedded PDF
+                $('#docPreviewModal').on('hidden.bs.modal', function() {
+                    $('#docPreviewContainer').html('<span class="text-muted">Loading...</span>');
+                });
+
                 $('#validation').validate({
                     rules: {
                         name_primary: 'required',

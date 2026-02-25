@@ -33,7 +33,7 @@
                             <tbody>
                                 @forelse ($applications as $application)
                                     <tr>
-                                        <td>{{ $application->id }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td><a href="{{ route('applications.view_applications', $application->id) }}" class="styled-link">{{ $application->certificate_name }}</a> </td>
                                         <td>{{ $application->p_email }}</td>
                                         <td>{{ $application->country->country_name }}</td>

@@ -22,8 +22,8 @@
                     </a>
                 </li> --}}
 
-                <!-- New Application Years Page Link -->
-                <li class="nav-item @if (Request::segment(1) == 'applications' && Request::segment(2) == 'year') active @endif">
+                <!-- Applications Link - active on all /applications/* pages -->
+                <li class="nav-item @if (Request::segment(1) == 'applications') active @endif">
                     <a href="{{ route('applications.year') }}">
                         <i class="la la-calendar"></i>
                         <span>Applications</span>
