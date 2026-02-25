@@ -66,7 +66,8 @@
 			<!-- Logo -->
 			<div class="header-left">
 				<a href="{{ route('home') }}" class="logo">
-					<img src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" width="40" height="40" alt="">
+					@php $avatar = Auth::user()->avatar && file_exists(public_path('assets/images/' . Auth::user()->avatar)) ? Auth::user()->avatar : 'photo_defaults.jpg'; @endphp
+					<img src="{{ URL::to('/assets/images/' . $avatar) }}" width="40" height="40" alt="">
 				</a>
 			</div>
 			<!-- /Logo -->
@@ -116,7 +117,7 @@
 				<li class="nav-item dropdown has-arrow main-drop">
 					<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
 						<span class="user-img">
-						<img src="{{ URL::to('/assets/images/'. Auth::user()->avatar) }}" alt="">
+						<img src="{{ URL::to('/assets/images/' . $avatar) }}" alt="">
 						<span class="status online"></span></span>
 						<span>{{ Session::get('name') }}</span>
 					</a>

@@ -240,7 +240,7 @@ class FormController extends Controller
         // Update the is_deleted field
         $application->update(['is_deleted' => 1]);
 
-        return back()->with('success', 'Application updated successfully!');
+        return redirect()->route('applications')->with('success', 'Application deleted successfully!');
     }
 
     // Show the year selection page
