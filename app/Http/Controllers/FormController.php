@@ -155,7 +155,7 @@ class FormController extends Controller
             'personal_email' => 'required|email|unique:application_form,personal_email,' . $id,
             'mobile_no' => 'required|string|max:15',
             'country_id' => 'required|exists:countries,id',
-            'status' => 'required|in:received,in_application,question,approved,invoiced,rejected,withdrawn,closed,payment_pending',
+            'status' => 'required|in:received,question,approved,rejected,closed',
             'city' => 'nullable|string|max:255',
             'street' => 'nullable|string|max:255',
             'workplace' => 'nullable|string|max:255',
@@ -232,7 +232,7 @@ class FormController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|in:received,in_application,question,approved,invoiced,rejected,withdrawn,closed,payment_pending',
+            'status' => 'required|in:received,question,approved,rejected,closed',
         ]);
 
         $application = FormModel::findOrFail($id);

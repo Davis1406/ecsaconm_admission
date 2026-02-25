@@ -340,14 +340,10 @@
                                                     <label>Status</label>
                                                     <select class="select form-control" id="status" name="status">
                                                         <option value="received" {{ $application->status == 'received' ? 'selected' : '' }}>Applications</option>
-                                                        <option value="in_application" {{ $application->status == 'in_application' ? 'selected' : '' }}>In the Application</option>
                                                         <option value="question" {{ $application->status == 'question' ? 'selected' : '' }}>Question</option>
                                                         <option value="approved" {{ $application->status == 'approved' ? 'selected' : '' }}>Approved</option>
-                                                        <option value="invoiced" {{ $application->status == 'invoiced' ? 'selected' : '' }}>Invoiced</option>
                                                         <option value="rejected" {{ $application->status == 'rejected' ? 'selected' : '' }}>Rejected</option>
-                                                        <option value="withdrawn" {{ $application->status == 'withdrawn' ? 'selected' : '' }}>Withdrawn</option>
                                                         <option value="closed" {{ $application->status == 'closed' ? 'selected' : '' }}>Closed</option>
-                                                        <option value="payment_pending" {{ $application->status == 'payment_pending' ? 'selected' : '' }}>Payment Pending</option>
                                                     </select>
                                                 </div>
                                                 

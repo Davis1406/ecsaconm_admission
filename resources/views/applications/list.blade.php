@@ -41,10 +41,7 @@
                                         <td>
                                             @switch($application->status)
                                                 @case('received')
-                                                    <span class="badge bg-inverse-primary">Applications</span>
-                                                    @break
-                                                @case('in_application')
-                                                    <span class="badge bg-inverse-info">In the Application</span>
+                                                    <span class="badge" style="background-color:#fde8eb;color:#fe5067;">Applications</span>
                                                     @break
                                                 @case('question')
                                                     <span class="badge bg-inverse-warning">Question</span>
@@ -52,23 +49,14 @@
                                                 @case('approved')
                                                     <span class="badge bg-inverse-success">Approved</span>
                                                     @break
-                                                @case('invoiced')
-                                                    <span class="badge" style="background-color:#e8d5f5;color:#6f42c1;">Invoiced</span>
-                                                    @break
                                                 @case('rejected')
                                                     <span class="badge bg-inverse-danger">Rejected</span>
                                                     @break
-                                                @case('withdrawn')
-                                                    <span class="badge bg-inverse-secondary">Withdrawn</span>
-                                                    @break
                                                 @case('closed')
-                                                    <span class="badge" style="background-color:#e2e3e5;color:#383d41;">Closed</span>
-                                                    @break
-                                                @case('payment_pending')
-                                                    <span class="badge" style="background-color:#fff3cd;color:#856404;">Payment Pending</span>
+                                                    <span class="badge" style="background-color:#34444c;color:#fff;">Closed</span>
                                                     @break
                                                 @default
-                                                    <span class="badge bg-inverse-secondary">Unknown</span>
+                                                    <span class="badge" style="background-color:#fde8eb;color:#fe5067;">Applications</span>
                                             @endswitch
                                         </td>
                                         <td class="text-right">
