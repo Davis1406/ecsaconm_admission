@@ -24,6 +24,7 @@
                                     <th>ID</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Hospital</th>
                                     <th>Country</th>
                                     <th>Programme</th>
                                     <th>Status</th>
@@ -35,7 +36,8 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td><a href="{{ route('applications.view_applications', $application->id) }}" class="styled-link">{{ $application->certificate_name }}</a> </td>
-                                        <td>{{ $application->p_email }}</td>
+                                        <td>{{ $application->personal_email }}</td>
+                                        <td>{{ $application->workplace }}</td>
                                         <td>{{ $application->country->country_name }}</td>
                                         <td>{{ $application->programme->programme_name }}</td>
                                         <td>
@@ -84,7 +86,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5" class="text-center">No applications found</td>
+                                        <td colspan="8" class="text-center">No applications found</td>
                                     </tr>
                                 @endforelse
                             </tbody>

@@ -4,11 +4,14 @@ $(function () {
         "lengthChange": true,
         "autoWidth": false,
         "paging": true,
+        "scrollY": "65vh",
+        "scrollCollapse": true,
         "buttons": ["copy", "csv", "excel", "pdf", "colvis"],
         "columns": [
             { "visible": true }, // ID
             { "visible": true }, // Name
             { "visible": true }, // Email
+            { "visible": true }, // Hospital
             { "visible": true }, // Country
             { "visible": true }, // Programme
             { "visible": true }, // Status
