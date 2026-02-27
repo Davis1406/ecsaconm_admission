@@ -169,7 +169,7 @@
 	<script src="{{ URL::to('assets/js/jquery.validate.js') }}"></script>	
 	<!-- Custom JS -->
 
-	<script src="{{ URL::to('assets/js/data.js') }}"></script>
+	<script src="{{ URL::to('assets/js/data.js') }}?v={{ filemtime(public_path('assets/js/data.js')) }}"></script>
 
 	<script src="{{ URL::to('assets/js/app.js') }}"></script>
 
